@@ -109,9 +109,9 @@ for code in md.disasm(codes,start_addr):
                     if key != reg_name and regs[key]==patch_addr:#说明patch_addr的指令对多个寄存器有写操作,不进行patch操作
                         patch_flag=False
                 if patch_flag==True \
-                and (idc.print_insn_mnem(regs[reg_name])!='call'\
-                or idc.print_insn_mnem(regs[reg_name])!='push'\
-                or idc.print_insn_mnem(regs[reg_name])!='pop'):
+                and not (idc.print_insn_mnem(regs[reg_name])=='call'\
+                or idc.print_insn_mnem(regs[reg_name])=='push'\
+                or idc.print_insn_mnem(regs[reg_name])=='pop'):
                     patch(regs[reg_name]) #排除所有的call,push,pop指令,认为其是有效指令
         regs[reg_name]=code.address
 
