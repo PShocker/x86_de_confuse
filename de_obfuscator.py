@@ -80,7 +80,7 @@ def patch(addr):
 start_addr=0x8660BF #起始地址
 end_addr=0x0866155 #结束地址
 
-codes=get_bytes(start_addr,idc.next_head(end_addr)-start_addr)
+codes=get_bytes(start_addr,get_item_size(end_addr)+end_addr-start_addr)
 for code in md.disasm(codes,start_addr):
     readList,writeList = code.regs_access() # readList对寄存器的读,writeList对寄存器的写
     # print(code)
